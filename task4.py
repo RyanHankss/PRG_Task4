@@ -6,17 +6,17 @@ def readfile(cl='CustomerList.txt'):
             print "Error opening file"
             return None
         else:
-            c_l = []
+            cc = []
             data = here.readlines()
             for customer in data:
                 c = customer.split('\n')[0]
                 c = c.split(',')
-                c_l.append(c)
+                cc.append(c)
             here.close()
-            return c_l
+            return cc
 
 
-def append_customer(new_customer, filename=''):
+def append_customer(new_customer, filename='CustomerList.txt'):
     if filename:
         try:
             fp = open(filename, 'a')
@@ -60,19 +60,19 @@ def get_input(prompt):
 
 
 def get_number(prompt):
-    ipt = ''
+    th = ''
 
-    while len(ipt) != 10:
+    while len(th) != 10:
         try:
-            ipt = raw_input(prompt)
+            th = raw_input(prompt)
             if len(ipt) != 10:
                 raise ValueError
-            temp = int(ipt)
+            temp = int(th)
         except ValueError:
             print "Not a valid number"
-            ipt = ''
+            th = ''
 
-    return ipt
+    return th
 
 
 def generate_id(last_customer, phone):
@@ -111,7 +111,7 @@ def nc():
     phone = get_number("Phone: ")
     uid = generate_id(c_l[-1], phone)
 
-    print "Your ID number is: " + uid
+    print "The Account has been successfully created, the new User ID number is: " + uid
     new_customer = [ uid, fname, lname, street, city, state, zipcode, phone ]
     customer_list = append_customer(new_customer, 'CustomerList.txt')
 
