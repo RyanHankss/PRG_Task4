@@ -152,5 +152,5 @@ def main():
 
 
 if __name__ == '__main__':
-    c_l = readfile('CustomerList.txt')
+    cc = readfile('CustomerList.txt')
     main()
