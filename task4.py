@@ -30,8 +30,8 @@ def append_customer(new_customer, filename='CustomerList.txt'):
             return readfile(filename)
 
 
-def match_customer(input_id, c_l):
-    for customer in c_l:
+def match_customer(input_id, cc):
+    for customer in cc:
         if customer[0] == input_id:
             return customer
 
@@ -65,7 +65,7 @@ def get_number(prompt):
     while len(th) != 10:
         try:
             th = raw_input(prompt)
-            if len(ipt) != 10:
+            if len(th) != 10:
                 raise ValueError
             temp = int(th)
         except ValueError:
@@ -77,16 +77,16 @@ def get_number(prompt):
 
 def generate_id(last_customer, phone):
     last_id = last_customer[0]
-    seq = int(last_id[:2])
-    seq = seq+1
+    s = int(last_id[:2])
+    s = s+1
     ph = phone[-4:]
-    uid = str(seq) + str(ph)
+    uid = str(s) + str(ph)
     return uid
 
 
 def rc():
     input_id = raw_input("Enter ID number: ")
-    customer = match_customer(input_id, c_l)
+    customer = match_customer(input_id, cc)
 
     if customer:
         print_customer_detail(customer)
@@ -98,7 +98,7 @@ def rc():
 
 
 def nc():
-    global c_l
+    global cc
     print "\nWelcome, new Customer!"
     print "Please enter all data: "
 
@@ -109,11 +109,11 @@ def nc():
     state = get_input("State: ").title()
     zipcode = get_input("Zipcode: ")
     phone = get_number("Phone: ")
-    uid = generate_id(c_l[-1], phone)
+    uid = generate_id(cc[-1], phone)
 
     print "The Account has been successfully created, the new User ID number is: " + uid
-    new_customer = [ uid, fname, lname, street, city, state, zipcode, phone ]
-    customer_list = append_customer(new_customer, 'CustomerList.txt')
+    new_customer = [uid, fname, lname, street, city, state, zipcode, phone]
+    cc = append_customer(new_customer, 'CustomerList.txt')
 
     print "New customer added:"
     print_customer_detail(new_customer)
